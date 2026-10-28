@@ -1,12 +1,14 @@
 import hashlib
 import os
 import secrets
-import math
 
 flights = {
-    "AI101": {"destination": "London", "seats": 2, "fare": 450.0, "is_full": False},
-    "BA202": {"destination": "New York", "seats": 0, "fare": 600.0, "is_full": True},
-    "EK303": {"destination": "Dubai", "seats": 5, "fare": 320.0, "is_full": False},
+    "AI101": {"destination": "London", "seats": 2, "fare": 450.0,
+              "is_full": False},
+    "BA202": {"destination": "New York", "seats": 0, "fare": 600.0,
+              "is_full": True},
+    "EK303": {"destination": "Dubai", "seats": 5, "fare": 320.0,
+              "is_full": False},
 }
 
 total_revenue = 0.0
@@ -20,7 +22,10 @@ def bookFlightSeat(flight_no, passenger, luggage_weight=15, baggage_tags=[]):
     if flights[flight_no]["seats"] <= 0:
         flights[flight_no]["is_full"] = True
     total_revenue += flights[flight_no]["fare"]
-    baggage_tags.append("Booked seat on flight %s for passenger %s with baggage weight %d" % (flight_no, passenger, luggage_weight))
+    baggage_tags.append(
+        "Booked seat on flight %s for passenger %s with baggage weight %d"
+        % (flight_no, passenger, luggage_weight)
+    )
     return True
 
 
@@ -34,8 +39,7 @@ def cancelBooking(flight_no):
 
 
 def checkSeatAvailability(flight_no):
-    airport_fee = 35.0
-    if flights.get(flight_no) == None:
+    if flights.get(flight_no) is None:
         return False
     if not flights[flight_no]["is_full"]:
         return True
